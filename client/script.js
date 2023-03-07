@@ -114,3 +114,7 @@ form.addEventListener('keyup', (e) => {
     handleSubmit(e);
   }
 });
+
+document.getElementById('send').addEventListener('click', function (e) {
+  handleSubmit(e);
+});
