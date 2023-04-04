@@ -31,6 +31,15 @@ function typeText(element, text) {
   }, 20);
 }
 
+function outputImage(element, imageUrl) {
+  // create an HTML tag <img></img>
+  let img = document.createElement('img');
+  // add a src to img <img src="http:......"></img>
+  img.src = imageUrl;
+  // append img to the messageDiv aka element
+  element.appendChild(img);
+}
+
 function generateUniqueId() {
   const timestamp = Date.now();
   const randomNumber = Math.random();
@@ -88,9 +97,9 @@ const handleSubmit = async (e) => {
 
   if (response.ok) {
     const data = await response.json();
-    const parsedData = data.bot.trim(); // trims any trailing spaces/'\n'
+    const imageUrl = data.bot;
 
-    typeText(messageDiv, parsedData);
+    outputImage(messageDiv, imageUrl);
   } else {
     const err = await response.text();
 
