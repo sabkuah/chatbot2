@@ -117,7 +117,7 @@ form {
   max-width: 1280px;
   margin: 0 auto;
   padding: 10px;
-  background: #40414f;
+  background: #fff;
 
   display: flex;
   flex-direction: row;
@@ -127,7 +127,7 @@ form {
 textarea {
   width: 100%;
 
-  color: #fff;
+  color: #40414f;
   font-size: 18px;
 
   padding: 10px;
@@ -142,11 +142,6 @@ button {
   border: 0;
   cursor: pointer;
   background: transparent;
-  color: white;
-}
-
-#text, #image {
-  color: white;
 }
 
 form img {
