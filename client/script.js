@@ -64,7 +64,48 @@ function chatStripe(isAi, value, uniqueId) {
     `;
 }
 
-const handleSubmit = async (e) => {
+const handleTextSubmit = async (e) => {
+  e.preventDefault();
+  
+  const data = new FormData(form);
+
+  chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
+  form.reset();
+  
+  const uniqueId = generateUniqueId();
+  chatContainer.innerHTML += chatStripe(true, '', uniqueId);
+
+  const messageDiv = document.getElementById(uniqueId);
+  loader(messageDiv);
+
+  //   fetch data
+  const response = await fetch('https://chatbot2-1yyi.onrender.com', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      prompt: data.get('prompt'),
+    }),
+  });
+
+  clearInterval(loadInterval);
+  messageDiv.innerHTML = ' ';
+
+  if (response.ok) {
+    const data = await response.json();
+    const parsedData = data.bot.trim(); // trims any trailing spaces/'\n'
+
+    typeText(messageDiv, parsedData);
+  } else {
+    const err = await response.text();
+
+    messageDiv.innerHTML = 'Something went wrong';
+    alert(err);
+  }
+}
+
+const handleImageSubmit = async (e) => {
   e.preventDefault();
 
   const data = new FormData(form);
@@ -120,10 +161,14 @@ function greetUser() {
 
 form.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
-    handleSubmit(e);
+    handleTextSubmit(e);
   }
 });
 
-document.getElementById('send').addEventListener('click', function (e) {
-  handleSubmit(e);
+document.getElementById('text').addEventListener('click', function (e) {
+  handleTextSubmit(e);
 });
+
+document.getElementById('image').addEventListener('click', function (e) {
+  handleImageSubmit(e);
+ });
