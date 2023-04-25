@@ -86,6 +86,7 @@ const handleTextSubmit = async (e) => {
     },
     body: JSON.stringify({
       prompt: data.get('prompt'),
+      type: "text"
     }),
   });
 
@@ -130,6 +131,7 @@ const handleImageSubmit = async (e) => {
     },
     body: JSON.stringify({
       prompt: data.get('prompt'),
+      type: "image"
     }),
   });
 
