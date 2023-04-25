@@ -142,6 +142,11 @@ button {
   border: 0;
   cursor: pointer;
   background: transparent;
+  color: white;
+}
+
+#text, #image {
+  color: white;
 }
 
 form img {
